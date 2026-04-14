@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="create-roles-and-permissions" author="sharith_saavedra">
+        <comment>Implementación de RBAC según ADR-002</comment>
+        <sql>
+            -- Crear Roles si no existen
+            DO $$
+            BEGIN
+            IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'airline_admin') THEN
+            CREATE ROLE airline_admin;
+            END IF;
+            IF NOT EXISTS (SELECT FROM pg_catalog.pg_roles WHERE rolname = 'airline_staff') THEN
+            CREATE ROLE airline_staff;
+            END IF;
+            END $$;
+
+            -- Permisos para Administrador (Todo)
+            GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO airline_admin;
+
+            -- Permisos para Staff (Solo lectura de catálogos y gestión de vuelos)
+            GRANT SELECT ON ALL TABLES IN SCHEMA public TO airline_staff;
+            GRANT INSERT, UPDATE ON TABLE flight, flight_segment TO airline_staff;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

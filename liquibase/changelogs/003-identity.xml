@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+
+    <changeSet id="003" author="marlon" context="ddl">
+        <comment>Dominio de identidad. La definición detallada se migra desde modelo_postgresql.sql respetando la sintaxis PostgreSQL y la organización por dominio funcional.</comment>
+        <sqlFile
+            path="../../modelo_postgresql.sql"
+            relativeToChangelogFile="true"
+            splitStatements="false"
+            stripComments="false"
+            endDelimiter=";"/>
+    </changeSet>
+
+</databaseChangeLog>

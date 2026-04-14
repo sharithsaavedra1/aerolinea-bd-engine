@@ -1,0 +1,18 @@
+<changeSet id="insert-base-data" author="sharith_saavedra">
+    <sql>
+        -- 1. Geografía (Base de todo)
+        INSERT INTO continent (continent_code, continent_name) VALUES ('SA', 'South America');
+
+        -- Usando una subconsulta para obtener el ID del continente recién creado
+        INSERT INTO country (continent_id, iso_alpha2, iso_alpha3, country_name)
+        VALUES ((SELECT continent_id FROM continent WHERE continent_code = 'SA'), 'CO', 'COL', 'Colombia');
+
+        -- 2. Identidad
+        INSERT INTO document_type (document_type_name, document_type_abbreviation) VALUES ('Cédula de Ciudadanía', 'CC');
+
+        -- 3. Aeronaves
+        INSERT INTO manufacturer (manufacturer_name) VALUES ('Airbus');
+        INSERT INTO aircraft_model (manufacturer_id, model_name)
+        VALUES ((SELECT manufacturer_id FROM manufacturer WHERE manufacturer_name = 'Airbus'), 'A320');
+    </sql>
+</changeSet>
