@@ -1,6 +1,9 @@
 # airline-db-engine
 
 Repositorio técnico para la estabilización, versionamiento y despliegue del modelo de base de datos PostgreSQL entregado como insumo base.
+## enlace del repositorio de documentacion 
+https://github.com/sharithsaavedra1/aerolinea-docs-arquitectura 
+## enlace del trello https://github.com/sharithsaavedra1/aerolinea-docs-arquitectura
 
 ## Propósito
 
